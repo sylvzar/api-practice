@@ -3,10 +3,11 @@ import Home from './pages/Home';
 import GlobalStyles from './components/GlobalStyles';
 import styled from 'styled-components';
 
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const [movieDetail, setMovieDetail] = useState([]);
+
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&plot=full&apikey=7eb7254`;
@@ -22,18 +23,15 @@ function App() {
   useEffect(() => {
     getMovieRequest(searchValue);
   }, [searchValue]);
-  
-
-
 
   return (
     <div className="App">
       <GlobalStyles/>
       <Search>
-      <h3>Welcome to our film and TV database.</h3>
+      <h3>Welcome to our media database.</h3>
       <input type="text" placeholder="Search"  onChange={(event) => setSearchValue(event.target.value)}></input>
       </Search>
-      <Home searchValue={searchValue} setSearchValue={setSearchValue} movies={movies} movieDetail={movieDetail} setMovieDetail={setMovieDetail} /> 
+      <Home searchValue={searchValue} setSearchValue={setSearchValue} movies={movies}/> 
     </div>
   );
 }

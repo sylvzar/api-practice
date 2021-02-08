@@ -1,11 +1,18 @@
 import React from 'react'
+import styled from 'styled-components';
 
-function Movie() {
+const Movie = () => {
     return (
-        <div>
-            
-        </div>
+       <Card>
+           X
+       </Card>
     )
 }
+
+const Card = styled.div`
+padding: 2rem;
+display: flex;
+justify-content: center;
+`
 
 export default Movie
