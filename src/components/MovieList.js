@@ -1,44 +1,45 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Movie from './Movie';
-import axios from 'axios';
+import missingimage from '../img/missingimage.svg'
 const MovieList = (movies) => {
 
     const results = movies.movies.movies;
-
-    const [detail, setDetail] = useState([]);
+    const [detail, setDetail] = useState(['']);
 
     const getMovieDetail = async (index) =>
     {
         const url = `http://www.omdbapi.com/?i=${index}&apikey=7eb7254`;
-
         const data = await fetch(url);
         const dataJson = await data.json();
-        console.log(dataJson);
-        // createDetail(dataJson);  
+        console.log(dataJson.Ratings[0].Value);
+        setDetail(dataJson); 
     };
-    
+
 	return (
     <>
+    <Movie detail={detail}/>
     <AllMovies>
+        
         {results.map((movie, index) => 
     
         (
             <SingleMovie id={movie.imdbID} key={movie.imdbID} onClick={() => getMovieDetail(movie.imdbID)} >
                 <h4  className="title">{movie.Title} ({movie.Year})</h4>
-                <h4 className="media">Media: {movie.Type}</h4>
-                <img src={movie.Poster} alt={movie.Plot}></img>
+                <h4 className="media">Media: {movie.Type}</h4>{ movie.Poster === undefined ? <img src={movie.Poster} alt={movie.Plot}></img> : <img src={movie.Poster} alt={movie.Plot}></img>}
+                {/* <img src={movie.Poster} alt={movie.Plot}></img> */}
                
             </SingleMovie>
         ) )}
     </AllMovies>
-  
+    
     </>
 	); 
 };
 
 const AllMovies = styled.div`
-max-width: 100%;
+max-width: 1400px;
+margin: 0 auto;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
@@ -55,6 +56,7 @@ box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 margin: 1rem;
 cursor: pointer;
 padding: 0.3rem;
+transition-duration: 0.5s;
 
 &&:hover {
     background-color: rgba(255, 255, 255, 0.7);

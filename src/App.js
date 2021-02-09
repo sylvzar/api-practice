@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Home from './pages/Home';
+import Nav from './components/Nav'
 import GlobalStyles from './components/GlobalStyles';
 import styled from 'styled-components';
 
@@ -7,7 +8,6 @@ import styled from 'styled-components';
 function App() {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-
 
   const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&plot=full&apikey=7eb7254`;
@@ -27,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyles/>
+      <Nav/>
       <Search>
       <h3>Welcome to our media database.</h3>
       <input type="text" placeholder="Search"  onChange={(event) => setSearchValue(event.target.value)}></input>
