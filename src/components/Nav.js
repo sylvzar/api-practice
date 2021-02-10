@@ -11,7 +11,7 @@ const Nav = () => {
                <h4>mediaDB</h4>
             </div>
             <ul>
-                <li><a href="https://github.com/sylvzar/api-practice" target="blank">Github Repo</a></li>
+                <li><a href="https://github.com/sylvzar/api-practice" target="blank">Github</a></li>
                 <li><a href="http://www.sylvzar.com" target="blank">Author</a></li>
                 <li><a href="mailto:sazarzycki@gmail.com">Contact</a></li>
             </ul>
@@ -28,6 +28,7 @@ width: 100%;
 align-items: center;
 justify-content: space-between;
 
+flex-wrap: wrap;
 .logo {
     display: flex;
     align-items: center;
@@ -45,7 +46,7 @@ width: 2rem;
 
 ul {
     display: flex;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     font-weight: 300;
 }
 

@@ -18,7 +18,6 @@ const Movie = (detail, clearMovieDetail) => {
         <p><span>Cast:</span> {movieDetail.Actors}</p>
         <p><span>Awards:</span> {movieDetail.Awards}</p>
         <p><span>Runtime:</span> {movieDetail.Runtime}</p>
-        <p>{movieDetail.imdbID}</p>
         {movieDetail.Ratings !== 'undefined' ? 
         <p><span>Rating:</span> {movieDetail.Ratings[0].Value}</p> : <p><span>Rating:</span></p>
         }

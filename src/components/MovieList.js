@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Movie from './Movie';
 import missingimage from '../img/missingimage.svg'
-const MovieList = (movies) => {
+const MovieList = (movies, searchValue) => {
 
     const results = movies.movies.movies;
     const [detail, setDetail] = useState(['']);
-
     const getMovieDetail = async (index) =>
     {
         const url = `http://www.omdbapi.com/?i=${index}&apikey=7eb7254`;
@@ -16,14 +15,14 @@ const MovieList = (movies) => {
     };
 
     const clearDetail = () => {
-        console.log("Clear")
+        console.log(detail)
         setDetail('')
     }
 
 	return (
     <>
     {
-    detail !== '' ? <Button><button type="submit" onClick={() => clearDetail()}>Close</button></Button> : ''
+    results.length !== 0 && detail.Title !== undefined ? <Button><button type="submit" onClick={() => clearDetail()}>Close</button></Button> : ""
     }
     
     <Movie detail={detail}/>

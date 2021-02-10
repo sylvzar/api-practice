@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import MovieList from '../components/MovieList'
 
-const Home = (movies) => {
+const Home = (movies, searchValue) => {
 
     return (
         <Main>
-        <MovieList movies={movies}/>
+        <MovieList searchValue={searchValue} movies={movies}/>
         </Main>
     )
 }
