@@ -12,12 +12,20 @@ const MovieList = (movies) => {
         const url = `http://www.omdbapi.com/?i=${index}&apikey=7eb7254`;
         const data = await fetch(url);
         const dataJson = await data.json();
-        console.log(dataJson.Ratings[0].Value);
         setDetail(dataJson); 
     };
 
+    const clearDetail = () => {
+        console.log("Clear")
+        setDetail('')
+    }
+
 	return (
     <>
+    {
+    detail !== '' ? <Button><button type="submit" onClick={() => clearDetail()}>Close</button></Button> : ''
+    }
+    
     <Movie detail={detail}/>
     <AllMovies>
         
@@ -26,13 +34,10 @@ const MovieList = (movies) => {
         (
             <SingleMovie id={movie.imdbID} key={movie.imdbID} onClick={() => getMovieDetail(movie.imdbID)} >
                 <h4  className="title">{movie.Title} ({movie.Year})</h4>
-                <h4 className="media">Media: {movie.Type}</h4>{ movie.Poster === undefined ? <img src={movie.Poster} alt={movie.Plot}></img> : <img src={movie.Poster} alt={movie.Plot}></img>}
-                {/* <img src={movie.Poster} alt={movie.Plot}></img> */}
-               
+                <h4 className="media">Media: {movie.Type}</h4>{ movie.Poster !== "N/A" ? <img src={movie.Poster} alt={movie.Plot}></img> : <img src={missingimage} style={{opacity: 0.4}} alt={movie.Plot}></img>}    
             </SingleMovie>
         ) )}
     </AllMovies>
-    
     </>
 	); 
 };
@@ -50,17 +55,17 @@ position: relative;
 width: 12rem;
 margin-top: 1.0rem;
 max-height: 20rem;
-background-color: rgba(199, 199, 199, 0.7);
+
 border-radius: 5px;
-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.25);
 margin: 1rem;
 cursor: pointer;
 padding: 0.3rem;
 transition-duration: 0.5s;
 
 &&:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 1px 1px 20px rgba(180, 180, 180, 0.5);
+ 
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.30);
     transition-duration: 0.5s;
 }
 
@@ -91,7 +96,29 @@ img {
     max-height: 14rem;
     
 }
+`
 
+const Button = styled.div`
+display: flex;
+justify-content: center;
+
+button {
+width: 60%;
+max-width: 1100px;
+border: none;
+background-color: rgba(0, 0, 0, 0.1);
+padding: 0.6rem;
+cursor: pointer;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;
+box-shadow: 0px -1px 20px rgba(0, 0, 0, 0.10);
+transition-duration: 0.5s;
+}
+
+button:hover {
+    box-shadow: 0px -1px 20px rgba(0, 0, 0, 0.20);
+    transition-duration: 0.5s;
+}
 `
 
 export default MovieList;
